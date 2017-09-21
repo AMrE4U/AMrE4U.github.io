@@ -25,6 +25,23 @@ var InitDemo = function () {
 	});
 };
 
+var ycamAngle = 0;
+var xcamAngle = 0;
+document.addEventListener('keydown', (event) => {
+	if(event.key == 'd') {
+		ycamAngle += 1;
+	}
+	if(event.key == 'a') {
+		ycamAngle -= 1;
+	}
+	if(event.key == 'w') {
+		xcamAngle += 1;
+	}
+	if(event.key == 's') {
+		xcamAngle -= 1;
+	}
+})
+
 var RunDemo = function (vertexShaderText, fragmentShaderText, CrateImage) {
 	console.log('This is working');
 
@@ -46,7 +63,6 @@ var RunDemo = function (vertexShaderText, fragmentShaderText, CrateImage) {
 	gl.enable(gl.CULL_FACE);
 	gl.frontFace(gl.CCW);
 	gl.cullFace(gl.BACK);
-
 	//
 	// Create shaders
 	//
@@ -223,11 +239,14 @@ var RunDemo = function (vertexShaderText, fragmentShaderText, CrateImage) {
 	//
 	var identityMatrix = new Float32Array(16);
 	mat4.identity(identityMatrix);
-	var angle = 0;
+	var yangle = 0;
+	var xangle = 0;
 	var loop = function () {
-		angle = performance.now() / 1000 / 6 * 2 * Math.PI;
-		mat4.rotate(yRotationMatrix, identityMatrix, angle, [0, 1, 0]);
-		mat4.rotate(xRotationMatrix, identityMatrix, angle / 4, [1, 0, 0]);
+		//angle = performance.now() / 1000 / 6 * 2 * Math.PI;
+		yangle = glMatrix.toRadian(ycamAngle);
+		mat4.rotate(yRotationMatrix, identityMatrix, yangle, [0, 1, 0]);
+		xangle = glMatrix.toRadian(xcamAngle);
+		mat4.rotate(xRotationMatrix, identityMatrix, xangle, [1, 0, 0]);
 		mat4.mul(worldMatrix, yRotationMatrix, xRotationMatrix);
 		gl.uniformMatrix4fv(matWorldUniformLocation, gl.FALSE, worldMatrix);
 
