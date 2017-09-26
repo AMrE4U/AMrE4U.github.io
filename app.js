@@ -70,8 +70,11 @@ var mousemove = function(e) {
 }
 
 document.addEventListener('mousedown', mousedown);
+document.addEventListener('touchstart', mousedown);
 document.addEventListener('mouseup', mouseup);
+document.addEventListener('touchend', mouseup);
 document.addEventListener('mousemove', mousemove);
+document.addEventListener('touchmove', mousemove);
 
 var RunDemo = function (vertexShaderText, fragmentShaderText, CrateImage) {
 	console.log('This is working');
