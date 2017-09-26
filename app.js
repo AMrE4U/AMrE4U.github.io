@@ -40,7 +40,11 @@ document.addEventListener('keydown', (event) => {
 	if(event.key == 's') {
 		xcamAngle -= 1;
 	}
-})
+});
+
+document.addEventListener('mousedown', (event) => {
+	console.log(event);
+});
 
 var RunDemo = function (vertexShaderText, fragmentShaderText, CrateImage) {
 	console.log('This is working');
