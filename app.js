@@ -49,8 +49,16 @@ var mousedown = function(e) {
 	isClicked = true;
 	clickedX = e.x;
 	clickedY = e.y;
-}
 
+	//console.log(e);
+}
+var touchstart = function(e) {
+	isClicked = true;
+	clickedX = e.touches[0].clientX;
+	clickedY = e.touches[0].clientY;
+
+	console.log(e);
+}
 var mouseup = function(e) {
 	isClicked = false;
 }
@@ -65,16 +73,30 @@ var mousemove = function(e) {
 
 		clickedX = e.x;
 		clickedY = e.y;
-		//console.log(clickedX, e.x, dx, clickedY, e.y, dy);
+		//console.log(e);
+	}
+}
+
+var touchmove = function(e) {
+	if(isClicked) {
+		var dx = clickedX - e.touches[0].clientX;
+		var dy = clickedY - e.touches[0].clientY;
+
+		ycamAngle -= dx;
+		xcamAngle += dy;
+
+		clickedX = e.touches[0].clientX;
+		clickedY = e.touches[0].clientY;
+		//console.log(e);
 	}
 }
 
 document.addEventListener('mousedown', mousedown);
-document.addEventListener('touchstart', mousedown);
+document.addEventListener('touchstart', touchstart);
 document.addEventListener('mouseup', mouseup);
 document.addEventListener('touchend', mouseup);
 document.addEventListener('mousemove', mousemove);
-document.addEventListener('touchmove', mousemove);
+document.addEventListener('touchmove', touchmove);
 
 var RunDemo = function (vertexShaderText, fragmentShaderText, CrateImage) {
 	console.log('This is working');
