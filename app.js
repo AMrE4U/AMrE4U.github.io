@@ -42,10 +42,6 @@ document.addEventListener('keydown', (event) => {
 	}
 });
 
-document.addEventListener('mousedown', mousedown(event));
-document.addEventListener('mouseup', mouseup(event));
-document.addEventListener('mousemove', mousemove(event));
-
 var mousedown = function(e) {
 	console.log(e);
 }
@@ -57,6 +53,10 @@ var mouseup = function(e) {
 var mousemove = function(e) {
 	console.log(e);
 }
+
+document.addEventListener('mousedown', mousedown(event));
+document.addEventListener('mouseup', mouseup(event));
+document.addEventListener('mousemove', mousemove(event));
 
 var RunDemo = function (vertexShaderText, fragmentShaderText, CrateImage) {
 	console.log('This is working');
