@@ -42,21 +42,36 @@ document.addEventListener('keydown', (event) => {
 	}
 });
 
+var isClicked = false;
+var clickedX = 0;
+var clickedY = 0;
 var mousedown = function(e) {
-	console.log(e);
+	isClicked = true;
+	clickedX = e.x;
+	clickedY = e.y;
 }
 
 var mouseup = function(e) {
-	console.log(e);
+	isClicked = false;
 }
 
 var mousemove = function(e) {
-	console.log(e);
+	if(isClicked) {
+		var dx = clickedX - e.x;
+		var dy = clickedY - e.y;
+
+		ycamAngle -= dx;
+		xcamAngle += dy;
+
+		clickedX = e.x;
+		clickedY = e.y;
+		//console.log(clickedX, e.x, dx, clickedY, e.y, dy);
+	}
 }
 
-document.addEventListener('mousedown', mousedown(event));
-document.addEventListener('mouseup', mouseup(event));
-document.addEventListener('mousemove', mousemove(event));
+document.addEventListener('mousedown', mousedown);
+document.addEventListener('mouseup', mouseup);
+document.addEventListener('mousemove', mousemove);
 
 var RunDemo = function (vertexShaderText, fragmentShaderText, CrateImage) {
 	console.log('This is working');
