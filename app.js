@@ -293,12 +293,12 @@ var RunDemo = function (vertexShaderText, fragmentShaderText, CrateImage) {
 	//
 	// Main render loop
 	//
-	var identityMatrix = new Float32Array(16);
+	//var identityMatrix = new Float32Array(16);
 	var yangle = 0;
 	var xangle = 0;
 	var loop = function () {
 		//angle = performance.now() / 1000 / 6 * 2 * Math.PI;
-		mat4.multiply(worldMatrix, viewMatrix, projMatrix);
+		//mat4.multiply(worldMatrix, viewMatrix, projMatrix);
 		yangle = glMatrix.toRadian(ycamAngle);
 		mat4.rotateY(worldMatrix, worldMatrix, yangle);
 		xangle = glMatrix.toRadian(xcamAngle);
