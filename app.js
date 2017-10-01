@@ -298,11 +298,11 @@ var RunDemo = function (vertexShaderText, fragmentShaderText, CrateImage) {
 	var xangle = 0;
 	var loop = function () {
 		//angle = performance.now() / 1000 / 6 * 2 * Math.PI;
-		//mat4.multiply(worldMatrix, viewMatrix, projMatrix);
+		mat4.multiply(worldMatrix, viewMatrix, projMatrix);
 		yangle = glMatrix.toRadian(ycamAngle);
-		mat4.rotateY(worldMatrix, worldMatrix, yangle);
+		//mat4.rotateY(worldMatrix, worldMatrix, yangle);
 		xangle = glMatrix.toRadian(xcamAngle);
-		mat4.rotateX(worldMatrix, worldMatrix, xangle);
+		//mat4.rotateX(worldMatrix, worldMatrix, xangle);
 		gl.uniformMatrix4fv(matWorldUniformLocation, gl.FALSE, worldMatrix);
 
 		gl.clearColor(0.75, 0.85, 0.8, 1.0);
