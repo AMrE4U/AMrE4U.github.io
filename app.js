@@ -27,18 +27,27 @@ var InitDemo = function () {
 
 var ycamAngle = 0;
 var xcamAngle = 0;
+var camPos = {x: 0,
+							y: 0,
+							z: 8};
 document.addEventListener('keydown', (event) => {
 	if(event.key == 'd') {
-		ycamAngle += 1;
+		camPos.x += 1;
 	}
 	if(event.key == 'a') {
-		ycamAngle -= 1;
+		camPos.x -= 1;
 	}
 	if(event.key == 'w') {
-		xcamAngle += 1;
+		camPos.y += 1;
 	}
 	if(event.key == 's') {
-		xcamAngle -= 1;
+		camPos.y -= 1;
+	}
+	if(event.key == 'e') {
+		camPos.z += 1;
+	}
+	if(event.key == 'q') {
+		camPos.z -= 1;
 	}
 });
 
@@ -280,7 +289,7 @@ var RunDemo = function (vertexShaderText, fragmentShaderText, CrateImage) {
 	var viewMatrix = new Float32Array(16);
 	var projMatrix = new Float32Array(16);
 	mat4.identity(worldMatrix);
-	mat4.lookAt(viewMatrix, [0, 0, -8], [0, 0, 0], [0, 1, 0]);
+	//mat4.lookAt(viewMatrix, [0, 0, -8], [0, 0, 0], [0, 1, 0]);
 	mat4.perspective(projMatrix, glMatrix.toRadian(45), canvas.clientWidth / canvas.clientHeight, 0.1, 1000.0);
 
 	//gl.uniformMatrix4fv(matWorldUniformLocation, gl.FALSE, worldMatrix);
@@ -297,12 +306,13 @@ var RunDemo = function (vertexShaderText, fragmentShaderText, CrateImage) {
 	var yangle = 0;
 	var xangle = 0;
 	var loop = function () {
+		mat4.lookAt(viewMatrix, [camPos.x, camPos.y, camPos.z], [0, 0, 0], [0, 1, 0]);
 		//angle = performance.now() / 1000 / 6 * 2 * Math.PI;
 		mat4.multiply(worldMatrix, projMatrix, viewMatrix);
-		yangle = glMatrix.toRadian(ycamAngle);
-		mat4.rotateY(worldMatrix, worldMatrix, yangle);
 		xangle = glMatrix.toRadian(xcamAngle);
 		mat4.rotateX(worldMatrix, worldMatrix, xangle);
+		yangle = glMatrix.toRadian(ycamAngle);
+		mat4.rotateY(worldMatrix, worldMatrix, yangle);
 		gl.uniformMatrix4fv(matWorldUniformLocation, gl.FALSE, worldMatrix);
 
 		gl.clearColor(0.75, 0.85, 0.8, 1.0);
