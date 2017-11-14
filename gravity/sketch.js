@@ -1,26 +1,33 @@
-var particles = [];
+let world = [];
 
 function setup() {
-    createCanvas(700, 600);
+    createCanvas(windowWidth, windowHeight);
     background(0);
-    for ( var i = 0; i < 3; i++) {
-        particles.push(new Particle(random(width), random(height)));
+
+    //Add central body, large mass
+    world.push(new Particle(width/2, height/2, 1000, true));
+
+    //Add the smaller orbiting bodies
+    for ( let i = 0; i < 3; i++) {
+        world.push(new Particle(random(width), random(height), random(1,10)));
     }
-    
 }
 
 function draw() {
     background(0,0,0,10);
-    for(var i = particles.length - 1; i >= 0; i--) {
-        particles[i].applyGravity();
-        particles[i].update();
-        particles[i].show();
+
+    //Calculate the acceleration applied to all particles in a static state
+    for(let i = world.length - 1; i >= 0; i--) {
+        world[i].calcGravity(world);
     }
-    
-    //push();
-    //fill(255)
-    //textSize(24);
-    //text(particles.length, 10, 30);
-    //text(floor(frameRate()), 10, 60);
-    //pop();
+
+    //Then update all the particles to their new positions
+    for(let i = world.length - 1; i >= 0; i--) {
+        world[i].update();
+        world[i].show();
+    }
+}
+
+function mousePressed() {
+  world.push(new Particle(mouseX, mouseY, 10, true));
 }

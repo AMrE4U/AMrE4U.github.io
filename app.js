@@ -306,7 +306,12 @@ var RunDemo = function (vertexShaderText, fragmentShaderText, CrateImage) {
 	var yangle = 0;
 	var xangle = 0;
 	var loop = function () {
-		mat4.lookAt(viewMatrix, [camPos.x, camPos.y, camPos.z], [0, 0, 0], [0, 1, 0]);
+		//mat4.lookAt(viewMatrix, [camPos.x, camPos.y, camPos.z], [0, 0, 0], [0, 1, 0]);
+		mat4.lookAt(viewMatrix, [
+			camPos.z * Math.sin(glMatrix.toRadian(camPos.x)) * Math.cos(glMatrix.toRadian(camPos.y)),
+			camPos.z * Math.sin(glMatrix.toRadian(camPos.x)) * Math.sin(glMatrix.toRadian(camPos.y)),
+			camPos.z * Math.cos(glMatrix.toRadian(camPos.x))],
+			[0, 0, 0], [0, 1, 0]);
 		//angle = performance.now() / 1000 / 6 * 2 * Math.PI;
 		mat4.multiply(worldMatrix, projMatrix, viewMatrix);
 		xangle = glMatrix.toRadian(xcamAngle);
