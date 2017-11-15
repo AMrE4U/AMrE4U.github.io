@@ -14,7 +14,8 @@ function setup() {
 }
 
 function draw() {
-    background(0,0,0,10);
+    //background(0,0,0,10);
+    background(0);
 
     //Calculate the acceleration applied to all particles in a static state
     for(let i = world.length - 1; i >= 0; i--) {

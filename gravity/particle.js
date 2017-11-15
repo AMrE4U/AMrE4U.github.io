@@ -15,9 +15,11 @@ class Particle {
 
     this.acc = createVector(0, 0);
     this.mass = m;
+    this.vecLines = [];
   }
 
   calcGravity(world) {
+    this.vecLines = [];
     //Find the total acceleration felt by the particle from all objects in the system
     //F = G * ((m1 * m2)/(r * r))
     for(let i = world.length - 1; i >= 0; i--) {
@@ -29,6 +31,7 @@ class Particle {
         let F = G * ((world[i].mass * this.mass) / (r * r));
         grav.mult(F/this.mass);
         this.acc.add(grav);
+        this.vecLines.push(grav);
       }
     }
   }
@@ -47,5 +50,15 @@ class Particle {
     strokeWeight(4);
     stroke(255);
     point(this.pos.x, this.pos.y);
+
+    strokeWeight(1);
+    stroke(255, 0, 0);
+    for (let v of this.vecLines) {
+      v.mult(10000);
+      line(this.pos.x, this.pos.y, this.pos.x + v.x, this.pos.y + v.y);
+    }
+
+    stroke(0,255,0);
+    line(this.pos.x, this.pos.y, this.pos.x + this.vel.x * 10, this.pos.y + this.vel.y * 10);
   }
 }
