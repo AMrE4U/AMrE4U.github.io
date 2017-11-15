@@ -25,7 +25,7 @@ class Particle {
     for(let i = world.length - 1; i >= 0; i--) {
       if(world[i] != this) {
         let grav = createVector(world[i].pos.x - this.pos.x, world[i].pos.y - this.pos.y);
-        let r = grav.mag();
+        let r = max(this.mass,grav.mag());
         grav.normalize();
 
         let F = G * ((world[i].mass * this.mass) / (r * r));
@@ -59,6 +59,6 @@ class Particle {
     }
 
     stroke(0,255,0);
-    line(this.pos.x, this.pos.y, this.pos.x + this.vel.x * 10, this.pos.y + this.vel.y * 10);
+    line(this.pos.x, this.pos.y, this.pos.x + this.vel.x * 50, this.pos.y + this.vel.y * 50);
   }
 }
