@@ -22,6 +22,10 @@ function setup() {
     let visualPathsButton = createButton('Show Paths');
     visualPathsButton.mousePressed(() => {updateVisualPaths(visualPathsButton);});
     divElem.child(visualPathsButton);
+
+    let grid = createButton('Generate Grid');
+    grid.mousePressed(generateGrid);
+    divElem.child(grid);
 }
 
 function draw() {
@@ -44,7 +48,7 @@ function draw() {
 }
 
 function addParticle() {
-  world.push(new Particle(mouseX, mouseY, 10, false));
+  world.push(new Particle(mouseX, mouseY, random(1,10), false));
 }
 
 function resetWorld() {
@@ -58,5 +62,17 @@ function updateVisualPaths(button) {
     button.html("Show Vectors");
   } else {
     button.html("Show Paths");
+  }
+}
+
+function generateGrid() {
+  background(0);
+  world = [];
+  visualPaths = true;
+  let count = 20;
+  for (let i = count; i < width; i += width / count){
+    for (let j = count; j < height; j += height / count){
+      world.push(new Particle(i,j,10,true));
+    }
   }
 }
