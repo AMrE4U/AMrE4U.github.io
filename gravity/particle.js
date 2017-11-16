@@ -51,14 +51,16 @@ class Particle {
     stroke(255);
     point(this.pos.x, this.pos.y);
 
-    strokeWeight(1);
-    stroke(255, 0, 0);
-    for (let v of this.vecLines) {
-      v.mult(10000);
-      line(this.pos.x, this.pos.y, this.pos.x + v.x, this.pos.y + v.y);
-    }
+    if(!visualPaths) {
+      strokeWeight(1);
+      stroke(255, 0, 0);
+      for (let v of this.vecLines) {
+        v.mult(10000);
+        line(this.pos.x, this.pos.y, this.pos.x + v.x, this.pos.y + v.y);
+      }
 
-    stroke(0,255,0);
-    line(this.pos.x, this.pos.y, this.pos.x + this.vel.x * 50, this.pos.y + this.vel.y * 50);
+      stroke(0,255,0);
+      line(this.pos.x, this.pos.y, this.pos.x + this.vel.x * 50, this.pos.y + this.vel.y * 50);
+    }
   }
 }

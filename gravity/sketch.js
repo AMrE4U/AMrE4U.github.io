@@ -1,7 +1,9 @@
 let world = [];
+let visualPaths = false;
 
 function setup() {
-    createCanvas(windowWidth, windowHeight);
+    let canvas = createCanvas(windowWidth, windowHeight);
+    canvas.mousePressed(addParticle);
     background(0);
 
     //Add central body, large mass
@@ -11,11 +13,23 @@ function setup() {
     for ( let i = 0; i < 3; i++) {
         world.push(new Particle(random(width), random(height), random(1,10)));
     }
+
+    let divElem = select('#controls');
+    let reset = createButton('Reset');
+    reset.mousePressed(resetWorld);
+    divElem.child(reset);
+
+    let visualPathsButton = createButton('Show Paths');
+    visualPathsButton.mousePressed(() => {updateVisualPaths(visualPathsButton);});
+    divElem.child(visualPathsButton);
 }
 
 function draw() {
-    //background(0,0,0,10);
-    background(0);
+    if(visualPaths) {
+      background(0,0,0,10);
+    } else {
+      background(0);
+    }
 
     //Calculate the acceleration applied to all particles in a static state
     for(let i = world.length - 1; i >= 0; i--) {
@@ -29,6 +43,20 @@ function draw() {
     }
 }
 
-function mousePressed() {
-  world.push(new Particle(mouseX, mouseY, 10, true));
+function addParticle() {
+  world.push(new Particle(mouseX, mouseY, 10, false));
+}
+
+function resetWorld() {
+  world = [];
+  world.push(new Particle(width/2, height/2, 1000, true));
+}
+
+function updateVisualPaths(button) {
+  visualPaths = !visualPaths;
+  if(visualPaths){
+    button.html("Show Vectors");
+  } else {
+    button.html("Show Paths");
+  }
 }
