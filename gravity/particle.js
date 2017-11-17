@@ -16,34 +16,63 @@ class Particle {
     this.acc = createVector(0, 0);
     this.mass = m;
     this.vecLines = [];
+    this.delete = false;
   }
 
   calcGravity(world) {
-    this.vecLines = [];
     //Find the total acceleration felt by the particle from all objects in the system
     //F = G * ((m1 * m2)/(r * r))
-    for(let i = world.length - 1; i >= 0; i--) {
+    //for(let i = world.length - 1; i >= 0; i--) {
+    for(let i = 0; i < world.length; i++) {
       if(world[i] != this) {
         let grav = createVector(world[i].pos.x - this.pos.x, world[i].pos.y - this.pos.y);
-        let r = max(this.mass,grav.mag());
+        let r = max(10,grav.mag());
         grav.normalize();
 
         let F = G * ((world[i].mass * this.mass) / (r * r));
-        grav.mult(F/this.mass);
-        this.acc.add(grav);
-        this.vecLines.push(grav);
+
+        this.applyForce(F, grav);
+        // grav.mult(F/this.mass);
+        // this.acc.add(grav);
+        // this.vecLines.push(grav);
       }
     }
   }
 
-  applyForce(force) {
-    this.acc.add(force);
+  efficientCalcGravity(world, startIndex) {
+    //Find the total acceleration felt by the particle from all objects in the system
+    //F = G * ((m1 * m2)/(r * r))
+    for(let i = startIndex; i < world.length; i++) {
+      let grav = createVector(world[i].pos.x - this.pos.x, world[i].pos.y - this.pos.y);
+      let r = max(10,grav.mag());
+      grav.normalize();
+
+      let F = G * ((world[i].mass * this.mass) / (r * r));
+
+      world[i].applyForce(F, p5.Vector.mult(grav, -1));
+      this.applyForce(F, grav);
+    }
+  }
+
+  applyForce(force, direction) {
+    direction.mult(force/this.mass);
+    this.acc.add(direction);
+    this.vecLines.push(direction);
   }
 
   update() {
     this.vel.add(this.acc);
     this.pos.add(this.vel);
     this.acc.mult(0);
+    this.checkEdges();
+  }
+
+  checkEdges() {
+    if(this.pos.x < -width || this.pos.x > 2 * width) {
+      this.delete = true;
+    } else if(this.pos.y < -height || this.pos.y > 2 * height) {
+      this.delete = true;
+    }
   }
 
   show() {
@@ -55,12 +84,13 @@ class Particle {
       strokeWeight(1);
       stroke(255, 0, 0);
       for (let v of this.vecLines) {
-        v.mult(10000);
+        v.mult(1000);
         line(this.pos.x, this.pos.y, this.pos.x + v.x, this.pos.y + v.y);
       }
 
       stroke(0,255,0);
       line(this.pos.x, this.pos.y, this.pos.x + this.vel.x * 50, this.pos.y + this.vel.y * 50);
     }
+    this.vecLines = [];
   }
 }
