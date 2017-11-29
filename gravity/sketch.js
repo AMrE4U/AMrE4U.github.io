@@ -90,7 +90,7 @@ function generateGrid() {
   let count = 20;
   for (let i = count; i < width; i += width / count){
     for (let j = count; j < height; j += height / count){
-      world.push(new Particle(i,j,10,true));
+      world.push(new Particle(i,j,random(1,10),true));
     }
   }
 }

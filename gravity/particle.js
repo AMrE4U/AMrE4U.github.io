@@ -43,15 +43,31 @@ class Particle {
     //Find the total acceleration felt by the particle from all objects in the system
     //F = G * ((m1 * m2)/(r * r))
     for(let i = startIndex; i < world.length; i++) {
-      let grav = createVector(world[i].pos.x - this.pos.x, world[i].pos.y - this.pos.y);
-      let r = max(10,grav.mag());
-      grav.normalize();
+      if(!world[i].delete) {
+        let grav = createVector(world[i].pos.x - this.pos.x, world[i].pos.y - this.pos.y);
+        //let r = max(10,grav.mag());
+        let r = grav.mag();
+        if(r > 10) {
+          grav.normalize();
 
-      let F = G * ((world[i].mass * this.mass) / (r * r));
+          let F = G * ((world[i].mass * this.mass) / (r * r));
 
-      world[i].applyForce(F, p5.Vector.mult(grav, -1));
-      this.applyForce(F, grav);
+          world[i].applyForce(F, p5.Vector.mult(grav, -1));
+          this.applyForce(F, grav);
+        } else {
+          this.combineCollision(world[i]);
+        }
+      }
     }
+  }
+
+  combineCollision(body) {
+    let totalMass = this.mass + body.mass;
+    let vfx = ((this.mass * this.vel.x) + (body.mass * body.vel.x)) / (totalMass);
+    let vfy = ((this.mass * this.vel.y) + (body.mass * body.vel.y)) / (totalMass);
+    this.mass = totalMass;
+    this.vel = createVector(vfx, vfy);
+    body.delete = true;
   }
 
   applyForce(force, direction) {
@@ -79,6 +95,7 @@ class Particle {
     strokeWeight(4);
     stroke(255);
     point(this.pos.x, this.pos.y);
+    //ellipse(this.pos.x, this.pos.y, this.mass);
 
     if(!visualPaths) {
       strokeWeight(1);
