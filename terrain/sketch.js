@@ -6,11 +6,12 @@ var scl = 20;
 var flying = 0;
 
 function setup() {
-    createCanvas(600,600, WEBGL);
+    //createCanvas(600,600, WEBGL);
+    createCanvas(windowWidth, windowHeight, WEBGL);
     noStroke();
     fill(200);
-    w = 600;
-    h = 600;
+    w = width;
+    h = height;
     cols = w / scl;
     rows = h / scl;
 }
