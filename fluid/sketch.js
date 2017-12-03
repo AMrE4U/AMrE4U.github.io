@@ -12,11 +12,11 @@ let particles = [];
 let boundries = [];
 
 function setup() {
-  createCanvas(600, 600);
-  fr = createP('');
+  createCanvas(windowWidth, windowHeight);
+  //fr = createP('');
   boundries.push(new Boundary(width / 2, height, width, 60, 0));
-  boundries.push(new Boundary(40,500,200,30,45));
-  boundries.push(new Boundary(560, 500, 200, 30, -45));
+  boundries.push(new Boundary(40,height-100,200,30,45));
+  boundries.push(new Boundary(width-40, height-100, 200, 30, -45));
   for (let i = 0; i < 500; i++) {
     particles.push(new Particle(random(width), random(0, height - 300), 2));
   }
@@ -36,5 +36,5 @@ function draw() {
       particles.splice(i, 1);
     }
   }
-  fr.html(floor(frameRate()));
+  //fr.html(floor(frameRate()));
 }
