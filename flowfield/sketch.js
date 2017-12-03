@@ -16,11 +16,12 @@ var particles = [];
 var flowfield;
 
 function setup() {
-  createCanvas(600, 600);
+  //createCanvas(600, 600);
+  createCanvas(windowWidth, windowHeight);
   colorMode(HSB, 255);
   cols = floor(width / scl);
-  rows = floor(height / scl);
-  fr = createP('');
+  rows = floor(height / scl) + 1;
+  //fr = createP('');
 
   flowfield = new Array(cols * rows);
 
@@ -62,5 +63,5 @@ function draw() {
     particles[i].show();
   }
 
-  fr.html(floor(frameRate()));
+  //fr.html(floor(frameRate()));
 }
