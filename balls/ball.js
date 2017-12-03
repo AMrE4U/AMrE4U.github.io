@@ -1,18 +1,13 @@
 function Ball() {
-    this.pos = createVector(random(20, width - 20), random(20, height - 20));
-    this.vel = p5.Vector.random2D().mult(2);
     this.r = 20;
+    this.pos = createVector(random(this.r, width - this.r),
+                            random(this.r, height - this.r));
+    this.vel = p5.Vector.random2D().mult(2);
     this.c = color(random(100,255), random(100,255), random(100,255));
     
     this.update = function() {
         this.pos.add(this.vel);
-        
-        if(this.pos.x <= 0 + this.r || this.pos.x >= width - this.r) {
-            this.vel.x *= -1;
-        }
-        if(this.pos.y <= 0 + this.r || this.pos.y >= height - this.r) {
-            this.vel.y *= -1;
-        }
+        this.checkEdges();
     }
     
     this.collide = function() {
@@ -36,6 +31,25 @@ function Ball() {
                     balls[i].vel.add(p5.Vector.mult(reflection, (dotA - dotB)));
                 }
             }
+        }
+    }
+    
+    this.checkEdges = function() {
+        if(this.pos.x <= 0 + this.r) {
+            this.vel.x *= -1;
+            this.pos.x = this.r;
+        }
+        if (this.pos.x >= width - this.r) {
+            this.vel.x *= -1;
+            this.pos.x = width - this.r;
+        }
+        if (this.pos.y <= 0 + this.r) {
+            this.vel.y *= -1;
+            this.pos.y = this.r;
+        }
+        if (this.pos.y >= height - this.r) {
+            this.vel.y *= -1;
+            this.pos.y = height - this.r;
         }
     }
     
