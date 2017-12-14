@@ -18,14 +18,14 @@ let resolution = 12;
 function setup() {
   //createCanvas(600, 400);
   createCanvas(windowWidth, windowHeight);
-  frameRate(2);
+  //frameRate(2);
   cols = floor(width / resolution);
   rows = floor(height / resolution) + 1;
 
   grid = make2DArray(cols, rows);
   for (let i = 0; i < cols; i++) {
     for (let j = 0; j < rows; j++) {
-      grid[i][j] = floor(random(2));
+      grid[i][j] = (random() < .1 ? 1 : 0);
     }
   }
 }
@@ -40,8 +40,8 @@ function draw() {
       if (grid[i][j] == 1) {
         fill(0);
         stroke(255);
-        //rect(x, y, resolution - 1, resolution - 1);
-        ellipse(x, y, resolution, resolution);
+        rect(x, y, resolution - 1, resolution - 1);
+        //ellipse(x, y, resolution, resolution);
       }
     }
   }
