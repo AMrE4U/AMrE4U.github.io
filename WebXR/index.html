@@ -38,7 +38,7 @@
 
 			// globe
 			const sphere = new THREE.Mesh(
-			  new THREE.SphereGeometry(5, 50, 50),
+			  new THREE.SphereGeometry(.1, 50, 50),
 			  new THREE.ShaderMaterial({
 			    vertexShader: document.getElementById( 'vertexShader' ).textContent,
 			    fragmentShader: document.getElementById( 'fragmentShader' ).textContent,
@@ -49,23 +49,22 @@
 			    }
 			  })
 			)
-			sphere.position.set(0, 0, -60);
+			sphere.position.set(0, 0, -0.5);
+			scene.add(sphere)
 
 			// atmosphere
-			const atmosphere = new THREE.Mesh(
-			  new THREE.SphereGeometry(5, 50, 50),
-			  new THREE.ShaderMaterial({
-			    vertexShader: document.getElementById( 'atmosphereVert' ).textContent,
-			    fragmentShader: document.getElementById( 'atmosphereFrag' ).textContent,
-			    blending: THREE.AdditiveBlending,
-			    side: THREE.BackSide
-			  })
-			)
-			atmosphere.position.set(0, 0, -60);
-			atmosphere.scale.set(1.1, 1.1, 1.1)
-
-			scene.add(sphere)
-			scene.add(atmosphere)
+			// const atmosphere = new THREE.Mesh(
+			//   new THREE.SphereGeometry(5, 50, 50),
+			//   new THREE.ShaderMaterial({
+			//     vertexShader: document.getElementById( 'atmosphereVert' ).textContent,
+			//     fragmentShader: document.getElementById( 'atmosphereFrag' ).textContent,
+			//     blending: THREE.AdditiveBlending,
+			//     side: THREE.BackSide
+			//   })
+			// )
+			// atmosphere.position.set(0, 0, -60);
+			// atmosphere.scale.set(1.1, 1.1, 1.1)
+			// scene.add(atmosphere)
 
 			// Add the AR button to the body of the DOM
 			document.body.appendChild(ARButton.createButton(renderer));
