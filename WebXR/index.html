@@ -15,7 +15,7 @@
     import { ARButton } from 'https://unpkg.com/three@0.126.0/examples/jsm/webxr/ARButton.js';
 
 		let camera, scene, renderer;
-    let spere;
+    let sphere;
 
 		init();
 		animate();
@@ -36,7 +36,7 @@
 			container.appendChild(renderer.domElement);
 
 			// globe
-			const sphere = new THREE.Mesh(
+			sphere = new THREE.Mesh(
 			  new THREE.SphereGeometry(.1, 50, 50),
 			  new THREE.ShaderMaterial({
 			    vertexShader: document.getElementById( 'vertexShader' ).textContent,
