@@ -49,6 +49,7 @@
 			    }
 			  })
 			)
+			sphere.position.set(0, 0, -60);
 
 			// atmosphere
 			const atmosphere = new THREE.Mesh(
@@ -60,6 +61,7 @@
 			    side: THREE.BackSide
 			  })
 			)
+			atmosphere.position.set(0, 0, -60);
 			atmosphere.scale.set(1.1, 1.1, 1.1)
 
 			scene.add(sphere)
