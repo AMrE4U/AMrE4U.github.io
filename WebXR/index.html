@@ -36,7 +36,7 @@
 			container.appendChild(renderer.domElement);
 
 			// light
-			const light = new THREE.AmbientLight( 0x404040 ); // soft white light
+			const light = new THREE.AmbientLight( 0xffffff ); 
 			scene.add( light );
 
 			// globe
@@ -53,7 +53,7 @@
 			  // })
 				new THREE.MeshStandardMaterial({
 					map: new THREE.TextureLoader().load('./img/world.topo.bathy.200412.3x21600x10800.jpg'),
-					// bumpMap: new THREE.TextureLoader().load('./img/gebco_08_rev_elev_21600x10800.png')
+					bumpMap: new THREE.TextureLoader().load('./img/gebco_08_rev_elev_21600x10800.png')
 				})
 			)
 			sphere.position.set(0, 0, -0.5);
