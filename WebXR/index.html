@@ -35,6 +35,10 @@
 			renderer.xr.enabled = true; // New!
 			container.appendChild(renderer.domElement);
 
+			// light
+			const light = new THREE.AmbientLight( 0x404040 ); // soft white light
+			scene.add( light );
+
 			// globe
 			sphere = new THREE.Mesh(
 			  new THREE.SphereGeometry(.1, 50, 50),
