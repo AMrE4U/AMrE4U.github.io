@@ -76,12 +76,12 @@
 			scene.add(sphere)
 
 			//marker
-			marker = new THREE.Mesh(
+			posMarker = new THREE.Mesh(
 				new THREE.SphereGeometry(.001, 10, 10),
 				new THREE.MeshBasicMaterial({color: 0xff0000})
 			)
-			marker.postition.set(calcPosFromLatLonRad(25.1216688,-80.7372337, .2))
-			spere.add(marker)
+			posMarker.postition.set(calcPosFromLatLonRad(25.1216688,-80.7372337, .2))
+			spere.add(posMarker)
 
 			//atmosphere
 			// const atmosphere = new THREE.Mesh(
