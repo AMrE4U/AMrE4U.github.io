@@ -54,17 +54,16 @@ var stateCenter = {
 
 async function getStateData(state) {
   let url = `https://waterwatch.usgs.gov/webservices/flows14d?region=${state}&format=json`;
-  fetch(url).then(function(response) {
-    return response.json();
-  }).then(function(data) {
-    var totalFlow = 0;
-    var totalSites = 1;
-    Object.values(data.sites).forEach( site => {
-      if (site.flow != null) {
-        totalFlow += site.flow;
-        totalSites++;
-      }
-    })
-    return totalFlow/totalSites;
+  const response = await fetch(url);
+  const data = await response.json();
+
+  var totalFlow = 0;
+  var totalSites = 1;
+  Object.values(data.sites).forEach( site => {
+    if (site.flow != null) {
+      totalFlow += site.flow;
+      totalSites++;
+    }
   })
+  return totalFlow/totalSites;
 }
