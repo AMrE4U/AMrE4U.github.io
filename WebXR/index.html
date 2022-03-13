@@ -11,10 +11,13 @@
 
 <body>
 	<script type="module">
+		let version = '0.138.0'
+		import * as THREE from 'https://cdn.skypack.dev/three@<version>';
+
     // To start an AR scene with webXR, we can use a handy button provided by three.js
     // We first have to import it because it is a javascript module
-    import { ARButton } from 'https://unpkg.com/three@0.126.0/examples/jsm/webxr/ARButton.js';
-		import { OrbitControls } from 'https://unpkg.com/three@0.128.0/examples/jsm/controls/OrbitControls.js';
+    import { ARButton } from 'https://cdn.skypack.dev/three@<version>/examples/jsm/webxr/ARButton.js';
+		import { OrbitControls } from 'https://cdn.skypack.dev/three@<version>/examples/jsm/controls/OrbitControls.js';
 
 		let camera, scene, renderer;
     let sphere;
