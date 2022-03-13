@@ -38,6 +38,8 @@
 			renderer.xr.enabled = true; // New!
 			container.appendChild(renderer.domElement);
 
+			const controls = new OrbitControls( camera, renderer.domElement );
+
 			// light
 			const light = new THREE.DirectionalLight(0xffffff, 2)
 			light.position.set(1, 0, 0)
@@ -127,6 +129,7 @@
 		}
 
 		function render() {
+			controls.update();
 			renderer.render(scene, camera);
 			sphere.rotation.y += 0.002
 		}
