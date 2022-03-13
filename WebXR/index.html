@@ -75,6 +75,14 @@
 			sphere.position.set(0, 0, -0.5);
 			scene.add(sphere)
 
+			//marker
+			marker = new THREE.Mesh(
+				new THREE.SphereGeometry(.001, 10, 10),
+				new THREE.MeshBasicMaterial({color: 0xff0000})
+			)
+			marker.postition.set(calcPosFromLatLonRad(25.1216688,-80.7372337, .2))
+			spere.add(marker)
+
 			//atmosphere
 			// const atmosphere = new THREE.Mesh(
 			//   new THREE.SphereGeometry(.1, 50, 50),
@@ -93,6 +101,17 @@
 			document.body.appendChild(ARButton.createButton(renderer));
 
 			window.addEventListener('resize', onWindowResize, false);
+		}
+
+		function calcPosFromLatLonRad(lat,lon,radius){
+			var phi   = (90-lat)*(Math.PI/180);
+			var theta = (lon+180)*(Math.PI/180);
+
+			x = -(radius * Math.sin(phi)*Math.cos(theta));
+			z = (radius * Math.sin(phi)*Math.sin(theta));
+			y = (radius * Math.cos(phi));
+
+			return [x,y,z];
 		}
 
 		function onWindowResize() {
