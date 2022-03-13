@@ -118,7 +118,7 @@
 			let z = (radius * Math.sin(phi)*Math.sin(theta));
 			let y = (radius * Math.cos(phi));
 
-			return [x,y,z];
+			return new THREE.Vector3(x,y,z);
 		}
 
 		function onWindowResize() {
