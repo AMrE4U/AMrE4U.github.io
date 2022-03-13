@@ -73,7 +73,7 @@
 			sphere.castShadow = true;
 			sphere.receiveShadow = true;
 			sphere.position.set(0, 0, -0.5);
-			scene.add(sphere)
+			// scene.add(sphere)
 
 			//marker
 			const posMarker = new THREE.Mesh(
@@ -83,6 +83,7 @@
 			posMarker.position.set(calcPosFromLatLonRad(25.1216688,-80.7372337, .2))
 			sphere.add(posMarker)
 
+			scene.add(sphere)
 			//atmosphere
 			// const atmosphere = new THREE.Mesh(
 			//   new THREE.SphereGeometry(.1, 50, 50),
