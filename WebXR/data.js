@@ -57,6 +57,12 @@ function getStateData(state) {
   fetch(url).then(function(response) {
     return response.json();
   }).then(function(data) {
-    console.log(data);
+    var totalFlow = 0;
+    for (site in data['sites']) {
+      if (site['flow'] !== null) {
+        totalFlow += site['flow'];
+      }
+    }
+    console.log(totalFlow);
   })
 }
