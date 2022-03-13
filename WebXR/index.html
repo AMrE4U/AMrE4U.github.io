@@ -123,7 +123,7 @@
 			let y = (radius * Math.cos(phi));
 
 			//lets try to map the avgFlow to a Color
-			const markColor = Math.floor(avgFlow * 4000).toString(16);
+			const markColor = "0x" + Math.floor(avgFlow * 4000).toString(16);
 
 			//create the mesh and add it to obj
 			const posMarker = new THREE.Mesh(
