@@ -65,7 +65,6 @@ function getStateData(state) {
         totalSites++;
       }
     })
-    console.log(state + ": " + (totalFlow/totalSites));
     return totalFlow/totalSites;
   })
 }
