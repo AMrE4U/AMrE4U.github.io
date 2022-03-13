@@ -40,7 +40,7 @@
 
 			// light
 			const light = new THREE.DirectionalLight(0xffffff, 2)
-			light.position.set(1, 0, .2)
+			light.position.set(1, 0, 0)
 			light.castShadow = true
 			scene.add(light)
 
@@ -64,10 +64,10 @@
 			  // })
 				new THREE.MeshStandardMaterial({
 					map: new THREE.TextureLoader().load('./img/world.topo.bathy.200412.3.jpg'),
-					displacementMap: new THREE.TextureLoader().load('./img/gebco_08_rev_elev.png'),
-					displacementScale: .1,
-					// bumpMap: new THREE.TextureLoader().load('./img/gebco_08_rev_elev.png'),
-					// bumpScale: 1
+					// displacementMap: new THREE.TextureLoader().load('./img/gebco_08_rev_elev.png'),
+					// displacementScale: .1,
+					bumpMap: new THREE.TextureLoader().load('./img/gebco_08_rev_elev.png'),
+					bumpScale: 1
 				}),
 			)
 			sphere.castShadow = true;
