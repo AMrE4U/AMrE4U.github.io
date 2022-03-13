@@ -110,7 +110,6 @@
 			var phi   = (90-lat)*(Math.PI/180);
 			var theta = (lon+180)*(Math.PI/180);
 			var radius = obj.geometry.parameters.radius;
-			console.log(obj.geometry.parameters.radius);
 
 			//calcualte the position on obj
 			let x = -(radius * Math.sin(phi)*Math.cos(theta));
@@ -125,7 +124,7 @@
 			)
 			posMarker.position.set(x,y,z)
 			//posMarker.rotation.set(0.0, theta, phi - Math.PI * 0.5)
-			posMarker.lookAt(0,1,0)
+			//posMarker.lookAt(0,1,0)
 			console.log(posMarker)
 			obj.add(posMarker)
 		}
