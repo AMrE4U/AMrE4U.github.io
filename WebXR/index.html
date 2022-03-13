@@ -17,7 +17,7 @@
     import { ARButton } from 'https://cdn.skypack.dev/three@0.128.0/examples/jsm/webxr/ARButton.js';
 		import { OrbitControls } from 'https://cdn.skypack.dev/three@0.128.0/examples/jsm/controls/OrbitControls.js';
 
-		let camera, scene, renderer;
+		let camera, scene, renderer, controls;
     let sphere;
 
 		init();
@@ -40,7 +40,7 @@
 			renderer.xr.enabled = true; // New!
 			container.appendChild(renderer.domElement);
 
-			const controls = new OrbitControls( camera, renderer.domElement );
+			controls = new OrbitControls( camera, renderer.domElement );
 
 			// light
 			const light = new THREE.DirectionalLight(0xffffff, 2)
