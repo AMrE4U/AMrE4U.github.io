@@ -108,6 +108,7 @@
 			var phi   = (90-lat)*(Math.PI/180);
 			var theta = (lon+180)*(Math.PI/180);
 			var radius = obj.geometry.getAttribute("radius");
+			console.log(radius);
 
 			//calcualte the position on obj
 			let x = -(radius * Math.sin(phi)*Math.cos(theta));
