@@ -58,11 +58,14 @@ function getStateData(state) {
     return response.json();
   }).then(function(data) {
     var totalFlow = 0;
+    var totalSites = 1;
     Object.values(data.sites).forEach( site => {
       if (site.flow != null) {
         totalFlow += site.flow;
+        totalSites++;
       }
     })
-    console.log(state + ": " + totalFlow);
+    console.log(state + ": " + (totalFlow/totalSites);
+    return totalFlow/totalSites;
   })
 }

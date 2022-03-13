@@ -86,8 +86,7 @@
 			// createMarker(sphere, 71.3171767, -156.601499);
 			// createMarker(sphere, -63.3498876, -56.721168);
 			for (let state in stateCenter) {
-				getStateData(state);
-				createMarker(sphere, stateCenter[state][0], stateCenter[state][1]);
+				createMarker(sphere, state, stateCenter[state][0], stateCenter[state][1]);
 			}
 
 			scene.add(sphere)
@@ -111,7 +110,8 @@
 			window.addEventListener('resize', onWindowResize, false);
 		}
 
-		function createMarker(obj, lat, lon) {
+		function createMarker(obj, state, lat, lon) {
+			let avgFlow = await getStateData(state);
 			var phi   = (90-lat)*(Math.PI/180);
 			var theta = (lon+180)*(Math.PI/180);
 			var radius = obj.geometry.parameters.radius;
@@ -124,7 +124,7 @@
 			//create the mesh and add it to obj
 			const posMarker = new THREE.Mesh(
 				// new THREE.SphereGeometry(.001, 10, 10),
-				new THREE.ConeGeometry(.001, .01, 20),
+				new THREE.ConeGeometry(.001, avgFlow, 20),
 				new THREE.MeshBasicMaterial({color: 0xff0000})
 			)
 			posMarker.position.set(x,y,z)
