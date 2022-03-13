@@ -80,15 +80,8 @@
 			sphere.position.set(0, 0, 0);
 			// scene.add(sphere)
 
-			//marker
-			const posMarker = new THREE.Mesh(
-				// new THREE.SphereGeometry(.001, 10, 10),
-				new THREE.ConeGeometry(.001, .01, 20),
-				new THREE.MeshBasicMaterial({color: 0xff0000})
-			)
-			posMarker.position.copy(calcPosFromLatLonRad(25.1216688,-80.7372337, .2))
-			console.log(posMarker)
-			sphere.add(posMarker)
+			//Add marker
+			createMarker(sphere, 25.1216688, -80.7372337);
 
 			scene.add(sphere)
 			//atmosphere
@@ -109,6 +102,28 @@
 			document.body.appendChild(ARButton.createButton(renderer));
 
 			window.addEventListener('resize', onWindowResize, false);
+		}
+
+		function createMarker(obj, lat, lon) {
+			var phi   = (90-lat)*(Math.PI/180);
+			var theta = (lon+180)*(Math.PI/180);
+			var radius = obj.geometry.getAttribute("radius");
+
+			//calcualte the position on obj
+			let x = -(radius * Math.sin(phi)*Math.cos(theta));
+			let z = (radius * Math.sin(phi)*Math.sin(theta));
+			let y = (radius * Math.cos(phi));
+
+			//create the mesh and add it to obj
+			const posMarker = new THREE.Mesh(
+				// new THREE.SphereGeometry(.001, 10, 10),
+				new THREE.ConeGeometry(.001, .01, 20),
+				new THREE.MeshBasicMaterial({color: 0xff0000})
+			)
+			posMarker.position.set(x,y,z)
+			posMarker.rotation.set(0.0, -theta, phi - Math.PI * 0.5)
+			console.log(posMarker)
+			obj.add(posMarker)
 		}
 
 		function calcPosFromLatLonRad(lat,lon,radius){
