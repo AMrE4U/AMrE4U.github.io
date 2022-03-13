@@ -52,7 +52,7 @@ var stateCenter = {
   WY: [43.000325, -107.5545669]
 }
 
-function getStateData(state) {
+async function getStateData(state) {
   let url = `https://waterwatch.usgs.gov/webservices/flows14d?region=${state}&format=json`;
   fetch(url).then(function(response) {
     return response.json();
