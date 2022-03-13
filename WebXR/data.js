@@ -58,12 +58,13 @@ async function getStateData(state) {
   const data = await response.json();
 
   var totalFlow = 0;
-  var totalSites = 1;
+  var totalSites = 0;
   Object.values(data.sites).forEach( site => {
     if (site.flow != null) {
       totalFlow += site.flow;
       totalSites++;
     }
   })
+  if (totalSites == 0) {totalSites = 1;}
   return totalFlow/totalSites;
 }
