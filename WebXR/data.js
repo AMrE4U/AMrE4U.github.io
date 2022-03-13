@@ -59,10 +59,11 @@ function getStateData(state) {
   }).then(function(data) {
     var totalFlow = 0;
     for (site in data['sites']) {
+      console.log(site);
       if (site['flow'] !== null) {
         totalFlow += site['flow'];
       }
     }
-    console.log(totalFlow);
+    // console.log(totalFlow);
   })
 }
