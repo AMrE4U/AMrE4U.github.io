@@ -82,9 +82,12 @@
 			// scene.add(sphere)
 
 			//Add marker
-			createMarker(sphere, 25.1216688, -80.7372337);
-			createMarker(sphere, 71.3171767, -156.601499);
-			createMarker(sphere, -63.3498876, -56.721168);
+			// createMarker(sphere, 25.1216688, -80.7372337);
+			// createMarker(sphere, 71.3171767, -156.601499);
+			// createMarker(sphere, -63.3498876, -56.721168);
+			for (state in stateCenter) {
+				createMarker(sphere, stateCenter[state][0], stateCenter[state][1]);
+			}
 
 			scene.add(sphere)
 			//atmosphere
