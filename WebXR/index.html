@@ -39,6 +39,7 @@
 			// light
 			const light = new THREE.DirectionalLight(0xffffff, 2)
 			light.position.set(1, 0, .2)
+			light.castShadow = true
 			scene.add(light)
 
 			// globe
