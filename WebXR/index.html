@@ -37,7 +37,7 @@
 			container.appendChild(renderer.domElement);
 
 			// light
-			const light = new THREE.DirectionalLight()
+			const light = new THREE.DirectionalLight(0xffffff, 2)
 			light.position.set(1, 0, .2)
 			scene.add(light)
 
