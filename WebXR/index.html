@@ -43,11 +43,13 @@
 			controls = new OrbitControls( camera, renderer.domElement );
 			controls.target.set(0,0,-.5);
 
-			// light
-			//const light = new THREE.DirectionalLight(0xffffff, 2)
-			const light = new THREE.SpotLight(0xffffff,2)
-			light.position.set(1, 0, 1)
-			scene.add(light)
+			// lights
+			const spotLight = new THREE.SpotLight(0xffffff,2)
+			spotLight.position.set(1, 0, 1)
+			scene.add(spotLight)
+
+			const ambLight = new THREE.AmbientLight(0x7E7E7E)
+			scene.add(ambLight)
 
 			// globe
 			sphere = new THREE.Mesh(
@@ -82,8 +84,8 @@
 
 			scene.add(sphere)
 
-			light.target = sphere
-			scene.add(light.target)
+			spotLight.target = sphere
+			scene.add(spotLight.target)
 			//atmosphere
 			// const atmosphere = new THREE.Mesh(
 			//   new THREE.SphereGeometry(.1, 50, 50),
