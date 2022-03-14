@@ -46,8 +46,9 @@
 			controls.target.set(0,0,-.5);
 
 			// light
-			const light = new THREE.DirectionalLight(0xffffff, 2)
-			light.position.set(1, 0, 1)
+			//const light = new THREE.DirectionalLight(0xffffff, 2)
+			const light = new THREE.PointLight(0xffffff,2)
+			light.position.set(10, 0, 10)
 			light.castShadow = true
 			scene.add(light)
 
