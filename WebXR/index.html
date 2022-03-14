@@ -105,6 +105,9 @@
 			// atmosphere.scale.set(1.1, 1.1, 1.1)
 			// scene.add(atmosphere)
 
+			const helper = new THREE.CameraHelper( light.shadow.camera );
+			scene.add( helper );
+
 			// Add the AR button to the body of the DOM
 			document.body.appendChild(ARButton.createButton(renderer));
 
@@ -138,7 +141,6 @@
 				new THREE.ConeGeometry(.001, Math.log(avgFlow) * .005, 20),
 				new THREE.MeshStandardMaterial({
 					color: markColor,
-					emissive: new THREE.Color(10,10,10),
 					roughness: 0
 				})
 			)
