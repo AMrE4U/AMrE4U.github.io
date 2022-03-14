@@ -54,12 +54,12 @@
 			//Set up shadow properties for the light
 			light.shadow.mapSize.width = 512; // default
 			light.shadow.mapSize.height = 512; // default
-			light.shadow.camera.near = 0.5; // default
-			light.shadow.camera.far = 500; // default
+			light.shadow.camera.near = 0.1; // default
+			light.shadow.camera.far = 10; // default
 
 			// globe
 			sphere = new THREE.Mesh(
-			  new THREE.SphereGeometry(.2, 50, 50),
+			  new THREE.SphereGeometry(.2, 100, 100),
 			  // new THREE.ShaderMaterial({
 			  //   vertexShader: document.getElementById( 'vertexShader' ).textContent,
 			  //   fragmentShader: document.getElementById( 'fragmentShader' ).textContent,
@@ -138,7 +138,7 @@
 				new THREE.ConeGeometry(.001, Math.log(avgFlow) * .005, 20),
 				new THREE.MeshStandardMaterial({
 					color: markColor,
-					emissive: markColor,
+					emissive: new THREE.Color(10,10,10),
 					roughness: 0
 				})
 			)
