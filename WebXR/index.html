@@ -47,7 +47,7 @@
 
 			// light
 			const light = new THREE.DirectionalLight(0xffffff, 2)
-			light.position.set(1, 0, 0)
+			light.position.set(1, 0, 1)
 			light.castShadow = true
 			scene.add(light)
 
@@ -173,7 +173,7 @@
 		function render() {
 			controls.update();
 			renderer.render(scene, camera);
-			sphere.rotation.y += 0.002
+			//sphere.rotation.y += 0.002
 		}
 
 	</script>
