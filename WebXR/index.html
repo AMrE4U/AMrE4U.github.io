@@ -36,8 +36,6 @@
 			renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
 			renderer.setPixelRatio(window.devicePixelRatio);
 			renderer.setSize(window.innerWidth, window.innerHeight);
-			renderer.shadowMap.enabled = true;
-			renderer.shadowMap.type = THREE.PCFSoftShadowMap;
       // This next line is important to to enable the renderer for WebXR
 			renderer.xr.enabled = true; // New!
 			container.appendChild(renderer.domElement);
@@ -49,14 +47,7 @@
 			//const light = new THREE.DirectionalLight(0xffffff, 2)
 			const light = new THREE.SpotLight(0xffffff,2)
 			light.position.set(1, 0, 1)
-			light.castShadow = true
 			scene.add(light)
-
-			//Set up shadow properties for the light
-			light.shadow.mapSize.width = 1024; // default
-			light.shadow.mapSize.height = 1024; // default
-			light.shadow.camera.near = 0.1; // default
-			light.shadow.camera.far = 3; // default
 
 			// globe
 			sphere = new THREE.Mesh(
@@ -78,8 +69,6 @@
 					bumpScale: .1
 				}),
 			)
-			sphere.castShadow = true;
-			sphere.receiveShadow = true;
 			sphere.position.set(0, 0, -.5);
 			// scene.add(sphere)
 
@@ -108,9 +97,6 @@
 			// atmosphere.position.set(0, 0, -0.5);
 			// atmosphere.scale.set(1.1, 1.1, 1.1)
 			// scene.add(atmosphere)
-
-			const helper = new THREE.CameraHelper( light.shadow.camera );
-			scene.add( helper );
 
 			// Add the AR button to the body of the DOM
 			document.body.appendChild(ARButton.createButton(renderer));
@@ -150,7 +136,6 @@
 			)
 			posMarker.position.set(x,y,z)
 			posMarker.rotation.set(0.0, theta, phi)
-			posMarker.castShadow = true
 			obj.add(posMarker)
 		}
 
