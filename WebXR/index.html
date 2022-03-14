@@ -135,7 +135,7 @@
 			//create the mesh and add it to obj
 			const posMarker = new THREE.Mesh(
 				// new THREE.SphereGeometry(.001, 10, 10),
-				new THREE.CylinderGeometry(.001,.001, Math.log(avgFlow) * .005, 20),
+				new THREE.ConeGeometry(.001, Math.log(avgFlow) * .005, 20),
 				new THREE.MeshStandardMaterial({
 					color: markColor,
 					emissive: markColor,
