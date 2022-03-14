@@ -127,16 +127,20 @@
 			if(avgFlow <= 100) {
 				markColor = new THREE.Color(avgFlow/100,0,0)
 			} else if (avgFlow < 1000) {
-				markColor = new THREE.Color(0,avgFlow/1000,0)
+				markColor = new THREE.Color(0,0,avgFlow/1000)
 			} else {
-				markColor = new THREE.Color(0,0,avgFlow/10000)
+				markColor = new THREE.Color(0,avgFlow/10000,0)
 			}
 
 			//create the mesh and add it to obj
 			const posMarker = new THREE.Mesh(
 				// new THREE.SphereGeometry(.001, 10, 10),
-				new THREE.ConeGeometry(.001, Math.log(avgFlow) * .005, 20),
-				new THREE.MeshBasicMaterial({color: markColor})
+				new THREE.CylinderGeometry(.001,.001, Math.log(avgFlow) * .005, 20),
+				new THREE.MeshStandardMaterial({
+					color: markColor,
+					emissive: markColor,
+					roughness: 0
+				})
 			)
 			posMarker.position.set(x,y,z)
 			posMarker.rotation.set(0.0, theta, phi)
