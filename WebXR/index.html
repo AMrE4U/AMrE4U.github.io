@@ -123,7 +123,14 @@
 			let y = (radius * Math.cos(phi));
 
 			//lets try to map the avgFlow to a Color
-			const markColor = Math.floor(avgFlow * 4000);
+			var markColor;
+			if(avgFlow <= 100) {
+				markColor = new THREE.Color(avgColor/100,0,0)
+			} else if (avgFlow < 1000) {
+				markColor = new THREE.Color(0,avgColor/1000,0)
+			} else {
+				markColor = new THREE.Color(0,0,avgColor/10000)
+			}
 
 			//create the mesh and add it to obj
 			const posMarker = new THREE.Mesh(
