@@ -50,9 +50,7 @@
 			const light = new THREE.SpotLight(0xffffff,2)
 			light.position.set(1, 0, 1)
 			light.castShadow = true
-			light.target.position.set(0,0,0.5)
 			scene.add(light)
-			scene.add(light.target)
 
 			//Set up shadow properties for the light
 			light.shadow.mapSize.width = 512; // default
@@ -94,6 +92,9 @@
 			}
 
 			scene.add(sphere)
+
+			light.target = sphere
+			scene.add(light.target)
 			//atmosphere
 			// const atmosphere = new THREE.Mesh(
 			//   new THREE.SphereGeometry(.1, 50, 50),
